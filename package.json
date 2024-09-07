@@ -1,0 +1,38 @@
+{
+  "name": "use-zman",
+  "version": "1.2.0",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc"
+  },
+  "keywords": [
+    "react",
+    "hook",
+    "language",
+    "translation",
+    "internationalization",
+    "i18n",
+    "use-zman",
+    "hoshangdev"
+  ],
+  "author": "HoshangDEV <contact@hoshang.dev>",
+  "license": "ISC",
+  "description": "A simple React hook to add multiple languages to your React app.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/HoshangDEV/use-zman.git"
+  },
+  "bugs": {
+    "url": "https://github.com/HoshangDEV/use-zman/issues"
+  },
+  "homepage": "https://github.com/HoshangDEV/use-zman#readme",
+  "dependencies": {
+    "react": "^18.3.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.5",
+    "typescript": "^5.5.4"
+  }
+}
