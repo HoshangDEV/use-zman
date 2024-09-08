@@ -3,6 +3,7 @@ import React, {
   useContext,
   useState,
   useEffect,
+  useMemo,
   ReactNode,
 } from "react";
 
@@ -34,31 +35,32 @@ export const ZmanProvider = ({
   defaultZman = "en",
 }: ZmanProviderProps) => {
   const [zman, setCurrentZman] = useState(getInitialZman(defaultZman));
-  const [texts, setTexts] = useState(translations[zman] || translations["en"]);
+
+  const texts = useMemo(() => {
+    return translations[zman] || translations["en"];
+  }, [zman, translations]);
 
   useEffect(() => {
     const savedZman = localStorage.getItem("zman");
     if (savedZman && translations[savedZman]) {
       setCurrentZman(savedZman);
-      setTexts(translations[savedZman]);
     }
   }, [translations]);
 
   const setZman = (zman: string) => {
     if (translations[zman]) {
       setCurrentZman(zman);
-      setTexts(translations[zman]);
       localStorage.setItem("zman", zman);
     } else {
       setCurrentZman("en");
-      setTexts(translations["en"]);
+      console.warn(`Unsupported language '${zman}', falling back to 'en'.`);
     }
   };
 
+  const contextValue = useMemo(() => ({ texts, setZman }), [texts, setZman]);
+
   return (
-    <ZmanContext.Provider value={{ texts, setZman }}>
-      {children}
-    </ZmanContext.Provider>
+    <ZmanContext.Provider value={contextValue}>{children}</ZmanContext.Provider>
   );
 };
 

@@ -44,7 +44,6 @@ const translations = {
 const App = () => {
   return (
     <ZmanProvider translations={translations}>
-      {" "}
       // 👈
       <div>
         <h1>Hello World</h1>
