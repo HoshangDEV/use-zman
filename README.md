@@ -79,13 +79,13 @@ import { useZman } from "use-zman";
 5. Use the `useZman` hook to access the translations:
 
 ```tsx
-const { texts, setZman } = useZman();
+const { texts, setZman, currentZman } = useZman();
 ```
 
 6. Use the `texts` object to access the translations:
 
 ```tsx
-const { texts, setZman } = useZman();
+const { texts, setZman, currentZman } = useZman();
 
 <p>{texts.hello}</p>; // سڵاو جیهان
 ```
@@ -93,8 +93,16 @@ const { texts, setZman } = useZman();
 7. Use the `setZman` function to change the language:
 
 ```tsx
-const { texts, setZman } = useZman();
+const { texts, setZman, currentZman } = useZman();
 
 <button onClick={() => setZman("en")}>English</button>
 <button onClick={() => setZman("ku")}>Kurdish</button>
+```
+
+8. Use the `currentZman` to get the current language:
+
+```tsx
+const { texts, setZman, currentZman } = useZman();
+
+<p>{currentZman}</p>; // en
 ```

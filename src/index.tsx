@@ -20,6 +20,7 @@ interface ZmanProviderProps {
 interface ZmanContextProps {
   texts: { [key: string]: string };
   setZman: (zman: string) => void;
+  currentZman: string;
 }
 
 const ZmanContext = createContext<ZmanContextProps | undefined>(undefined);
@@ -47,17 +48,23 @@ export const ZmanProvider = ({
     }
   }, [translations]);
 
-  const setZman = (zman: string) => {
-    if (translations[zman]) {
-      setCurrentZman(zman);
-      localStorage.setItem("zman", zman);
-    } else {
-      setCurrentZman("en");
-      console.warn(`Unsupported language '${zman}', falling back to 'en'.`);
-    }
-  };
+  const setZman = useMemo(
+    () => (zman: string) => {
+      if (translations[zman]) {
+        setCurrentZman(zman);
+        localStorage.setItem("zman", zman);
+      } else {
+        setCurrentZman("en");
+        console.warn(`Unsupported language '${zman}', falling back to 'en'.`);
+      }
+    },
+    [translations]
+  );
 
-  const contextValue = useMemo(() => ({ texts, setZman }), [texts, setZman]);
+  const contextValue = useMemo(
+    () => ({ texts, setZman, currentZman: zman }),
+    [texts, setZman, zman]
+  );
 
   return (
     <ZmanContext.Provider value={contextValue}>{children}</ZmanContext.Provider>
